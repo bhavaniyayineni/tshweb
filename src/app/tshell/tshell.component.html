@@ -1,0 +1,44 @@
+<div class="main">
+  <div class="side">
+    <div class="logo">
+      <div class="logoTxt">
+        TSh
+      </div>
+    </div>
+    <div class="tablebar">
+      <div class="tblBtn" *ngFor="let table of tables">
+        <h4>{{table.name}}</h4>
+        <div class="btnCont">
+          <a type="button" class="btn btn-primary btn-xs" href="https://osquery.io/schema/3.3.2#{{table.name}}" target="_blank">
+            <span class="info">info</span>
+          </a>
+          <button type="button" class="btn btn-primary btn-xs" (click)="displayTable(table.name)">
+            <span class="info">query</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="query">
+
+      <div class="code">
+        <codemirror [config]="codeMirrorConfig" [(ngModel)]="code">
+        </codemirror>
+      </div>
+
+      <div class="fetchBtnArea">
+        <button type="button" class="fetchBtn btn btn-primary" (click)="execQuery()">
+          <span>Fetch</span>
+        </button>
+      </div>
+    </div>
+    <br><br>
+    <div class="content">
+      <div class="dataTbl" *ngIf="data && data.length > 0">
+        <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+      </div>
+    </div>
+  </div>
+</div>
